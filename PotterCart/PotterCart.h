@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include <vector>
+#include <map>
 
 class PotterCart
 {
@@ -13,6 +13,11 @@ public:
 
 private:
 	static int PRICE_PER_BOOK;
-	std::vector<uint32_t> m_books;
+
+private:
+	uint32_t GetNumberOfBooks(void) const;
+	uint32_t GetNumberOfPair(void) const;
+
+	std::map<uint32_t, uint32_t> m_books;
 };
 
