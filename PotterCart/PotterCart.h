@@ -12,6 +12,7 @@ public:
 	uint32_t GetTotal(void) const;
 
 private:
+	static int PRICE_PER_BOOK;
 	std::vector<uint32_t> m_books;
 };
 
