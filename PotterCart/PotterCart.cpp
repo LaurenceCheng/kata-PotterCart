@@ -2,6 +2,7 @@
 #include <algorithm>
 
 int PotterCart::PRICE_PER_BOOK = 100;
+double PotterCart::DISCOUNT_FOR_PAIR = 0.95;
 
 PotterCart::PotterCart(void)
 {
@@ -21,10 +22,10 @@ uint32_t PotterCart::GetTotal(void) const
 	if (m_books.size() >= 2)
 	{
 		auto numberOfPair = GetNumberOfPair();
-		auto totalPriceOfPairs = numberOfPair * PRICE_PER_BOOK * 2 * 0.95;
+		auto totalPriceOfPairs = numberOfPair * static_cast<uint32_t>(PRICE_PER_BOOK * 2 * DISCOUNT_FOR_PAIR);
 
 		auto numberOfSingle = GetNumberOfBooks() - 2 * numberOfPair;
-		return totalPriceOfPairs + numberOfSingle * 100;
+		return totalPriceOfPairs + numberOfSingle * PRICE_PER_BOOK;
 	}
 	else
 	{

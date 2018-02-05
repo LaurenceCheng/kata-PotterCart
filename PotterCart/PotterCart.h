@@ -13,6 +13,7 @@ public:
 
 private:
 	static int PRICE_PER_BOOK;
+	static double DISCOUNT_FOR_PAIR;
 
 private:
 	uint32_t GetNumberOfBooks(void) const;
