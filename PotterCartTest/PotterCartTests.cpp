@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "../PotterCart/PotterCart.h"
 
-TEST(PotterCartTest, 第一集買了一本_其他都沒買_價格應為100元) // 100 * 1 = 100
+// 第一集買了一本，其他都沒買，價格應為100*1=100元
+TEST(PotterCartTest, Given_BuyABook1_When_GetTotal_Then_TotalShouldBe100)
 {
 	PotterCart cart;
 	cart.AddPotterBook(1);
