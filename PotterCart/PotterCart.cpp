@@ -19,7 +19,20 @@ void PotterCart::AddPotterBook(uint32_t volume)
 
 uint32_t PotterCart::GetTotal(void)
 {
-	if (m_books.size() >= 2)
+	if (m_books.size() >= 3)
+	{
+		auto countOfTrio = GetCountOfTrio();
+		auto totalPriceOfTrios = countOfTrio * static_cast<uint32_t>(PRICE_PER_BOOK * 3 * 0.9);
+		RemoveTrio();
+
+		auto countOfDuo = GetCountOfDuo();
+		auto totalPriceOfDuos = countOfDuo * static_cast<uint32_t>(PRICE_PER_BOOK * 2 * DISCOUNT_FOR_PAIR);
+		RemoveDuo();
+
+		auto countOfSolo = GetCountOfSolo();
+		return totalPriceOfTrios + totalPriceOfDuos + countOfSolo * PRICE_PER_BOOK;
+	}
+	if (m_books.size() == 2)
 	{
 		auto countOfDuo = GetCountOfDuo();
 		auto totalPriceOfDuos = countOfDuo * static_cast<uint32_t>(PRICE_PER_BOOK * 2 * DISCOUNT_FOR_PAIR);
@@ -36,25 +49,25 @@ uint32_t PotterCart::GetTotal(void)
 
 uint32_t PotterCart::GetCountOfSolo(void) const
 {
-	auto minCountOfVolume = 0u;
-	for (const auto &volume : m_books)
+	auto volumeWithMinCount = std::min_element(m_books.cbegin(), m_books.cend(), m_books.value_comp());
+	if (volumeWithMinCount == m_books.cend())
 	{
-		minCountOfVolume = std::min(volume.second, minCountOfVolume);
+		return 0;
 	}
-
-	return minCountOfVolume;
+	else
+	{
+		return volumeWithMinCount->second;
+	}
 }
 
 uint32_t PotterCart::GetCountOfDuo(void) const
 {
-	auto minCountOfVolume = std::numeric_limits<uint32_t>::max();
-	for (const auto &volume : m_books)
-	{
-		if (volume.second == 0) continue;
-		minCountOfVolume = std::min(volume.second, minCountOfVolume);
-	}
+	return GetCountOfSolo();
+}
 
-	return minCountOfVolume;
+uint32_t PotterCart::GetCountOfTrio(void) const
+{
+	return GetCountOfDuo();
 }
 
 void PotterCart::RemoveDuo(void)
@@ -73,4 +86,9 @@ void PotterCart::RemoveDuo(void)
 			iter++;
 		}
 	}
+}
+
+void PotterCart::RemoveTrio(void)
+{
+	RemoveDuo();
 }

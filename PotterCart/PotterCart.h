@@ -18,7 +18,9 @@ private:
 private:
 	uint32_t GetCountOfSolo(void) const;
 	uint32_t GetCountOfDuo(void) const;
+	uint32_t GetCountOfTrio(void) const;
 	void RemoveDuo(void);
+	void RemoveTrio(void);
 
 	std::map<uint32_t, uint32_t> m_books;
 };
