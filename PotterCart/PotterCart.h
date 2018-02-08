@@ -14,6 +14,7 @@ public:
 private:
 	static int PRICE_PER_BOOK;
 	static double DISCOUNT_FOR_PAIR;
+	static double DISCOUNT_FOR_TRIO;
 
 private:
 	uint32_t GetCountOfSet(uint32_t numberPerSet) const;

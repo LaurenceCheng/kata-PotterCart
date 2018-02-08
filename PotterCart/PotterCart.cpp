@@ -3,6 +3,7 @@
 
 int PotterCart::PRICE_PER_BOOK = 100;
 double PotterCart::DISCOUNT_FOR_PAIR = 0.95;
+double PotterCart::DISCOUNT_FOR_TRIO = 0.9;
 
 PotterCart::PotterCart(void)
 {
@@ -22,7 +23,7 @@ uint32_t PotterCart::GetTotal(void)
 	if (m_books.size() >= 3)
 	{
 		auto countOfTrio = GetCountOfTrio();
-		auto totalPriceOfTrios = countOfTrio * static_cast<uint32_t>(PRICE_PER_BOOK * 3 * 0.9);
+		auto totalPriceOfTrios = countOfTrio * static_cast<uint32_t>(PRICE_PER_BOOK * 3 * DISCOUNT_FOR_TRIO);
 		RemoveTrio();
 
 		auto countOfDuo = GetCountOfDuo();
