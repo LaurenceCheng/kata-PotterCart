@@ -4,6 +4,7 @@
 int PotterCart::PRICE_PER_BOOK = 100;
 double PotterCart::DISCOUNT_FOR_PAIR = 0.95;
 double PotterCart::DISCOUNT_FOR_TRIO = 0.9;
+double PotterCart::DISCOUNT_FOR_QUARTET = 0.8;
 
 PotterCart::PotterCart(void)
 {
@@ -20,7 +21,24 @@ void PotterCart::AddPotterBook(uint32_t volume)
 
 uint32_t PotterCart::GetTotal(void)
 {
-	if (m_books.size() >= 3)
+	if (m_books.size() >= 4)
+	{
+		auto countOfQuartet = GetCountOfQuartet();
+		auto totalPriceOfQuartet = countOfQuartet * static_cast<uint32_t>(PRICE_PER_BOOK * 4 * DISCOUNT_FOR_QUARTET);
+		RemoveQuartet();
+
+		auto countOfTrio = GetCountOfTrio();
+		auto totalPriceOfTrios = countOfTrio * static_cast<uint32_t>(PRICE_PER_BOOK * 3 * DISCOUNT_FOR_TRIO);
+		RemoveTrio();
+
+		auto countOfDuo = GetCountOfDuo();
+		auto totalPriceOfDuos = countOfDuo * static_cast<uint32_t>(PRICE_PER_BOOK * 2 * DISCOUNT_FOR_PAIR);
+		RemoveDuo();
+
+		auto countOfSolo = GetCountOfSolo();
+		return totalPriceOfQuartet + totalPriceOfTrios + totalPriceOfDuos + countOfSolo * PRICE_PER_BOOK;
+	}
+	if (m_books.size() == 3)
 	{
 		auto countOfTrio = GetCountOfTrio();
 		auto totalPriceOfTrios = countOfTrio * static_cast<uint32_t>(PRICE_PER_BOOK * 3 * DISCOUNT_FOR_TRIO);
@@ -74,6 +92,11 @@ uint32_t PotterCart::GetCountOfTrio(void) const
 	return GetCountOfSet(3);
 }
 
+uint32_t PotterCart::GetCountOfQuartet(void) const
+{
+	return GetCountOfSet(4);
+}
+
 void PotterCart::RemoveBooksBySet(uint32_t numberPerSet)
 {
 	auto countOfSet = GetCountOfSet(numberPerSet);
@@ -100,4 +123,9 @@ void PotterCart::RemoveDuo(void)
 void PotterCart::RemoveTrio(void)
 {
 	RemoveBooksBySet(3);
+}
+
+void PotterCart::RemoveQuartet(void)
+{
+	RemoveBooksBySet(4);
 }
