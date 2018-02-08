@@ -20,6 +20,7 @@ private:
 	uint32_t GetCountOfSolo(void) const;
 	uint32_t GetCountOfDuo(void) const;
 	uint32_t GetCountOfTrio(void) const;
+	void RemoveBooksBySet(uint32_t numberPerSet);
 	void RemoveDuo(void);
 	void RemoveTrio(void);
 

@@ -73,25 +73,30 @@ uint32_t PotterCart::GetCountOfTrio(void) const
 	return GetCountOfSet(3);
 }
 
-void PotterCart::RemoveDuo(void)
+void PotterCart::RemoveBooksBySet(uint32_t numberPerSet)
 {
-	auto countOfDuo = GetCountOfDuo();
+	auto countOfSet = GetCountOfSet(numberPerSet);
 	auto iter = m_books.begin();
 	while (iter != m_books.end())
 	{
-		if (iter->second == countOfDuo)
+		if (iter->second == countOfSet)
 		{
 			iter = m_books.erase(iter);
 		}
 		else
 		{
-			iter->second -= countOfDuo;
+			iter->second -= countOfSet;
 			iter++;
 		}
 	}
 }
 
+void PotterCart::RemoveDuo(void)
+{
+	RemoveBooksBySet(2);
+}
+
 void PotterCart::RemoveTrio(void)
 {
-	RemoveDuo();
+	RemoveBooksBySet(3);
 }
