@@ -16,6 +16,7 @@ private:
 	static double DISCOUNT_FOR_PAIR;
 
 private:
+	uint32_t GetCountOfSet(uint32_t numberPerSet) const;
 	uint32_t GetCountOfSolo(void) const;
 	uint32_t GetCountOfDuo(void) const;
 	uint32_t GetCountOfTrio(void) const;

@@ -47,27 +47,30 @@ uint32_t PotterCart::GetTotal(void)
 	}
 }
 
-uint32_t PotterCart::GetCountOfSolo(void) const
+uint32_t PotterCart::GetCountOfSet(uint32_t numberPerSet) const
 {
-	auto volumeWithMinCount = std::min_element(m_books.cbegin(), m_books.cend(), m_books.value_comp());
-	if (volumeWithMinCount == m_books.cend())
+	if (numberPerSet != m_books.size())
 	{
 		return 0;
 	}
-	else
-	{
-		return volumeWithMinCount->second;
-	}
+
+	auto volumeWithMinCount = std::min_element(m_books.cbegin(), m_books.cend(), m_books.value_comp());
+	return volumeWithMinCount->second;
+}
+
+uint32_t PotterCart::GetCountOfSolo(void) const
+{
+	return GetCountOfSet(1);
 }
 
 uint32_t PotterCart::GetCountOfDuo(void) const
 {
-	return GetCountOfSolo();
+	return GetCountOfSet(2);
 }
 
 uint32_t PotterCart::GetCountOfTrio(void) const
 {
-	return GetCountOfDuo();
+	return GetCountOfSet(3);
 }
 
 void PotterCart::RemoveDuo(void)
