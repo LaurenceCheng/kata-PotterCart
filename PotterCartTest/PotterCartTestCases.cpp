@@ -60,3 +60,15 @@ TEST_F(PotterCartTest, Given_BuyEachOfBook1_2_AndTwoBook3_When_GetTotal_Then_Tot
 
 	CartTotalShouldBe(370);
 }
+
+// 第一集買了一本，第二三集各買了兩本，價格應為100 * 3 * 0.9 + 100 * 2 * 0.95 = 460
+TEST_F(PotterCartTest, Given_BuyOneBook1_AndTwoBook2_And_3_When_GetTotal_Then_TotalShouldBe460)
+{
+	m_cart.AddPotterBook(1);
+	m_cart.AddPotterBook(2);
+	m_cart.AddPotterBook(2);
+	m_cart.AddPotterBook(3);
+	m_cart.AddPotterBook(3);
+
+	CartTotalShouldBe(460);
+}
