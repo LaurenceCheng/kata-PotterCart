@@ -21,49 +21,20 @@ void PotterCart::AddPotterBook(uint32_t volume)
 
 uint32_t PotterCart::GetTotal(void)
 {
-	if (m_books.size() >= 4)
-	{
-		auto countOfQuartet = GetCountOfQuartet();
-		auto totalPriceOfQuartet = countOfQuartet * static_cast<uint32_t>(PRICE_PER_BOOK * 4 * DISCOUNT_FOR_QUARTET);
-		RemoveQuartet();
+	auto countOfQuartet = GetCountOfQuartet();
+	auto totalPriceOfQuartet = countOfQuartet * static_cast<uint32_t>(PRICE_PER_BOOK * 4 * DISCOUNT_FOR_QUARTET);
+	RemoveQuartet();
 
-		auto countOfTrio = GetCountOfTrio();
-		auto totalPriceOfTrios = countOfTrio * static_cast<uint32_t>(PRICE_PER_BOOK * 3 * DISCOUNT_FOR_TRIO);
-		RemoveTrio();
+	auto countOfTrio = GetCountOfTrio();
+	auto totalPriceOfTrios = countOfTrio * static_cast<uint32_t>(PRICE_PER_BOOK * 3 * DISCOUNT_FOR_TRIO);
+	RemoveTrio();
 
-		auto countOfDuo = GetCountOfDuo();
-		auto totalPriceOfDuos = countOfDuo * static_cast<uint32_t>(PRICE_PER_BOOK * 2 * DISCOUNT_FOR_PAIR);
-		RemoveDuo();
+	auto countOfDuo = GetCountOfDuo();
+	auto totalPriceOfDuos = countOfDuo * static_cast<uint32_t>(PRICE_PER_BOOK * 2 * DISCOUNT_FOR_PAIR);
+	RemoveDuo();
 
-		auto countOfSolo = GetCountOfSolo();
-		return totalPriceOfQuartet + totalPriceOfTrios + totalPriceOfDuos + countOfSolo * PRICE_PER_BOOK;
-	}
-	if (m_books.size() == 3)
-	{
-		auto countOfTrio = GetCountOfTrio();
-		auto totalPriceOfTrios = countOfTrio * static_cast<uint32_t>(PRICE_PER_BOOK * 3 * DISCOUNT_FOR_TRIO);
-		RemoveTrio();
-
-		auto countOfDuo = GetCountOfDuo();
-		auto totalPriceOfDuos = countOfDuo * static_cast<uint32_t>(PRICE_PER_BOOK * 2 * DISCOUNT_FOR_PAIR);
-		RemoveDuo();
-
-		auto countOfSolo = GetCountOfSolo();
-		return totalPriceOfTrios + totalPriceOfDuos + countOfSolo * PRICE_PER_BOOK;
-	}
-	if (m_books.size() == 2)
-	{
-		auto countOfDuo = GetCountOfDuo();
-		auto totalPriceOfDuos = countOfDuo * static_cast<uint32_t>(PRICE_PER_BOOK * 2 * DISCOUNT_FOR_PAIR);
-		RemoveDuo();
-
-		auto countOfSolo = GetCountOfSolo();
-		return totalPriceOfDuos + countOfSolo * PRICE_PER_BOOK;
-	}
-	else
-	{
-		return m_books.begin()->second * PRICE_PER_BOOK;
-	}
+	auto countOfSolo = GetCountOfSolo();
+	return totalPriceOfQuartet + totalPriceOfTrios + totalPriceOfDuos + countOfSolo * PRICE_PER_BOOK;
 }
 
 uint32_t PotterCart::GetCountOfSet(uint32_t numberPerSet) const
